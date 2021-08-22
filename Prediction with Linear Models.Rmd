@@ -13,24 +13,27 @@ geometry: margin = 1in
 
 
 
-The objective of my analysis is to construct a fitted model based on the 1946
-observations of computer-generated structures for the Covid-19 protein, and
-use that fitted model to predict the values of the response variables of another
-data set with a further 1946 observations. I decided to start off by 
-constructing the full model with all the predictors based on the multiple 
-linear regression model. I then decided to remove multicollinearity from
-the 685 predictors in protein-train.csv. I assessed regression model 
-assumptions, and addressed outliers, then tested different model selection 
-methods on a single train/validation set.
-I considered forwards selection, backwards selection, and 
+Ever since computers were invented, scientists have tried to predict the 3-D structures of proteins based on their amino acid sequences coded by the underlying DNA: this is often referred to as the famous “protein folding problem”. Proteins carry out vital functions in our bodies, from blood transport (hemoglobin) to digestion (pepsin). On the other hand, proteins also play a key role allowing disease-causing viruses to be infectious. I will look at a subset of data from a specific spike protein associated with COVID-19, that enables the virus to attack human cells. Much research around the world has been devoted to better understanding this protein in the past 10 months. The file protein-train.csv contains 1946 samples of computer-generated structures for the COVID-19 spike protein. The response variable of interest is accuracy, which is a measure of how close that computer-generated structure is to a known benchmark structure. There are 685 explanatory variables.
+
+The objective of my analysis is to construct the best possible fitted model to
+predict accuracy from these variables based on the 1946
+observations of computer-generated structures for the Covid-19 protein.
+I decided to start off by
+constructing the full multiple
+linear regression model with all the predictors. I then decided to remove multicollinearity from
+the 685 predictors in protein-train.csv. I assessed regression model
+assumptions, and addressed outliers, then tested different model selection
+methods on a single train/validation set. Looking back, I should have utilized regularization methods
+like LASSO or ridge regression that can deal with multicollinearity and variable selection.
+I considered forwards selection, backwards selection, and
 forwards/backwards selection, with both Akaike information criterion (AIC) and
 Bayesian information criterion (BIC). I also considered Iterative conditional
 minimization (ICM) as a selection method, with AIC and BIC, and a harsher
-penalty than BIC. I then chose the best candidates and cross validated them, and 
-found the best model selection method, which I then applied on the full data 
+penalty than BIC. I then chose the best candidates and cross validated them, and
+found the best model selection method, which I then applied on the full data
 set in order to get the final model. I then assessed multiple linear regression
-assumptions for my final model. Finally, I used my final model to predict the 
-values of the response variables of protein-test.csv. I found in my main 
+assumptions for my final model. Finally, I used my final model to predict the
+values of the response variables of protein-test.csv. I found in my main
 results that forward selection with AIC as criteria had the lowest average root
 mean squared error (RMSPE), after cross validation, and so the model
 constructed with forward selection with AIC criteria would be my final model.
